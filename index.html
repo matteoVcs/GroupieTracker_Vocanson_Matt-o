@@ -8,9 +8,28 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="POST">
-        <input type="text" name="input" class="formulaire" autofocus>
-    </form>
+    <div class="header">
+        <div class="logo"></div>
+        <form method="POST">
+            <input type="text" name="input" class="formulaire" placeholder="Nom de l'amiibo (ex: mario)" autofocus>
+        </form>
+        <div class="catBox">
+            <a href="" class="cat">catégorie1</a>
+            <a href="" class="cat">catégorie2</a>
+            <a href="" class="cat">catégorie3</a>
+            <div class="dropdown">
+                <button class="dropbtn">Dropdown</button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                    <a href="#">Link 4</a>
+                    <a href="#">Link 5</a>
+                    <a href="#">Link 6</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main">
         {{range $v := .Data.Amiibo}}
             <div class="card">

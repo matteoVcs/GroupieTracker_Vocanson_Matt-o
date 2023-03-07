@@ -36,6 +36,7 @@ func main() {
 	fmt.Println("server is running on port 8080")
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
+	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
 	http.HandleFunc("/", a.Index)
 	fmt.Println(getData("link"))
 	http.ListenAndServe(":8080", nil)
