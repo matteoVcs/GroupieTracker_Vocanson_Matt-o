@@ -26,29 +26,36 @@ type AmiiboStruct struct {
 		Tail string `json:"tail"`
 		Type string `json:"type"`
 	} `json:"amiibo"`
-	Tmp *AmiiboStruct
+	Data  *AmiiboStruct
+	Input string
 }
 
 func main() {
 	var a AmiiboStruct
+	a.Input = ""
 	fmt.Println("server is running on port 8080")
 	fs := http.FileServer(http.Dir("css"))
 	http.Handle("/css/", http.StripPrefix("/css/", fs))
 	http.HandleFunc("/", a.Index)
+	fmt.Println(getData("link"))
 	http.ListenAndServe(":8080", nil)
 }
 
 func (a *AmiiboStruct) Index(w http.ResponseWriter, r *http.Request) {
 	tmp := template.Must(template.ParseFiles("index.html"))
 	details := AmiiboStruct{
-		Tmp: getData("link"),
+		Input: r.FormValue("input"),
+		Data:  getData(r.FormValue("input")),
 	}
 	tmp.Execute(w, details)
 }
 
 func getData(request string) *AmiiboStruct {
-	var url string = "https://www.amiiboapi.com/api/amiibo/?name="
-	url += request
+	var url string = "https://www.amiiboapi.com/api/amiibo/"
+	fmt.Println(request)
+	if request != "" {
+		url += "?name=" + request
+	}
 	timeClient := http.Client{
 		Timeout: time.Second * 2,
 	}
