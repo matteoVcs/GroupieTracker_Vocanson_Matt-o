@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css?v=1">
+    <script type="text/javascript" src="../script/script.js?v=2"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <a href="/"><div class="logo"></div></a>
+        <form method="POST">
+            <input type="text" name="input" class="formulaire" placeholder="Amiibo's Name (ex: mario)" autofocus>
+        </form>
+        <div class="catBox">
+            <a href="/" class="cat">Menu</a>
+            <a href="/name" class="cat">Name</a>
+            <a href="/character" class="cat">Character</a>
+        </div>
+    </div>
+    <div class="main">
+        {{range $i, $v := .Data.Amiibo}}
+        {{$Usage := index $.Usage.Amiibo $i}}
+            <div class="card" onclick="openPopUp(this)">
+                <div class="img"><img src="{{$v.Image}}" class="cardImg"/></div>
+                <div class="cardTitle">{{$v.Name}}</div>
+                <div class="cardText">Name: {{$v.Name}}<br>Character: {{$v.Character}}<br>Series: {{$v.AmiiboSeries}}<br>Origin: {{$v.GameSeries}}</div>
+            </div>
+            <div id="myModal">
+                <div class="modal-content">
+                    <div class="close" onclick="closePopUp(this)">&times;</div>
+                    <div class="dot-container">
+                        <div class="dot" onclick="showSlides1(this)">3ds</div>
+                        <div class="dot" onclick="showSlides2(this)">switch</div>
+                        <div class="dot" onclick="showSlides3(this)">wii U</div>
+                    </div>
+                    <div class="mySlides">
+                        {{range $p := $Usage.Games3DS}}
+                        {{range $usage := $p.AmiiboUsage}}
+                        <span class="GameName">{{$p.GameName}}:</span> <span class="GameUsage">{{$usage.Usage}}</span><br>
+                        {{end}}
+                        {{end}}
+                    </div>
+                    <div class="mySlides">
+                        {{range $p := $Usage.GamesSwitch}}
+                        {{range $usage := $p.AmiiboUsage}}
+                        <span class="GameName">{{$p.GameName}}:</span> <span class="GameUsage">{{$usage.Usage}}</span><br>
+                        {{end}}
+                        {{end}}
+                    </div>
+                    <div class="mySlides">
+                        {{range $p := $Usage.GamesWiiU}}
+                        {{range $usage := $p.AmiiboUsage}}
+                        <span class="GameName">{{$p.GameName}}:</span> <span class="GameUsage">{{$usage.Usage}}</span><br>
+                        {{end}}
+                        {{end}}
+                    </div>
+                </div>
+            </div>
+            {{end}}
+    </div>
+    <script src="../script/script.js"></script>
+</body>
+</html>

@@ -1,43 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=1">
     <title>Document</title>
 </head>
+
 <body>
-    <div class="header">
-        <div class="logo"></div>
-        <form method="POST">
-            <input type="text" name="input" class="formulaire" placeholder="Nom de l'amiibo (ex: mario)" autofocus>
-        </form>
-        <div class="catBox">
-            <a href="" class="cat">catégorie1</a>
-            <a href="" class="cat">catégorie2</a>
-            <a href="" class="cat">catégorie3</a>
-            <div class="dropdown">
-                <button class="dropbtn">Dropdown</button>
-                <div class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                    <a href="#">Link 4</a>
-                    <a href="#">Link 5</a>
-                    <a href="#">Link 6</a>
-                </div>
+    <div class="body2">
+        <div class="header">
+            <a href="/">
+                <div class="logo"></div>
+            </a>
+            <div class="catBox">
+                <a href="/" class="cat">Menu</a>
+                <a href="/name" class="cat">Name</a>
+                <a href="/character" class="cat">Character</a>
             </div>
         </div>
-    </div>
-    <div class="main">
-        {{range $v := .Data.Amiibo}}
-            <div class="card">
-                <div class="img"><img src="{{$v.Image}}" class="cardImg"/></div>
-                <div class="cardTitle">{{$v.Name}}</div>
-                <div class="cardText">{{$v.AmiiboSeries}}<br>{{$v.Character}}<br>{{$v.GameSeries}}<br>{{$v.Name}}<br>{{$v.Release}}</div>
-            </div>
-        {{end}}
+        <div class="indexBox">
+            Les Amiibo sont des figurines developpees par Nintendo, Elles servent à debloquer divers bonus en jeu<br><br>
+            Dans l'api que j'ai utilise, il y a differentes requetes:<br>
+            -rechercher les Amiibo par nom (par exemple mettre "mario" recherchera les amiibo ayant pour nom mario)<br>
+            - rechercher les amiibo par personnage (par exemple mettre "mario" rechera tout les amiibo qui sont mario meme si leur nom n'est pas exactement mario comme par exemple Dr Mario)<br><br>
+            Vous pouvez trouver le nom des amiibo pour tester l'api sur <a href="https://nintendo.fandom.com/wiki/List_of_amiibo" target="_blank">ce site</a><br><br>
+            Apres une recherche vous pouvez cliquer sur une fiche pour voir l'utilite de l'amiibo selon la platforme et le jeu sur le quel il est utilise
+        </div>
     </div>
 </body>
+
 </html>
